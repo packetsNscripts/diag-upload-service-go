@@ -1,4 +1,4 @@
-module github.com/packetNscripts/diag-upload-service-go
+module github.com/packetnscripts/diag-upload-service-go
 
 go 1.17
 
