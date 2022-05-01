@@ -1,0 +1,11 @@
+services:
+  diag-upload-service-go:
+    build:
+      context: .
+    container_name: diag-upload-service-go
+    hostname: diag-upload-service-go
+    ports:
+      - 8000:8000
+    deploy:
+      restart_policy:
+        condition: on-failure
