@@ -7,6 +7,7 @@ WORKDIR /usr/app
 COPY go.mod .
 COPY go.sum .
 RUN go mod download
+RUN mkdir diags
 
 # Copy source files
 COPY *.go ./
