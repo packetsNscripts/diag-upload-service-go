@@ -24,6 +24,7 @@ func main() {
 	})
 
 	e.POST("/upload", upload)
+	e.GET("/download/:id", download)
 
 	e.Logger.Fatal(e.Start(":" + httpPort))
 
@@ -62,4 +63,19 @@ func upload(c echo.Context) error {
 	}
 
 	return c.HTML(http.StatusOK, fmt.Sprintf("<p>File %s uploaded.</p>", file.Filename))
+}
+
+func download(c echo.Context) error {
+
+	fileName := c.Param("id")
+	downloadDir := "diags"
+	downloadFile := filepath.Join(downloadDir, fileName)
+
+	//check if file exists before responding
+	if _, err := os.Stat(downloadFile); err == nil {
+		return c.Attachment(downloadFile, fileName)
+	} else {
+		return c.HTML(http.StatusNotFound, fmt.Sprintf("<p> File %s does not exist </p>", fileName))
+	}
+
 }
